@@ -3,79 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>User Profile | Real Estate Property Management</title>
     <link rel="stylesheet" href="profile.css">
 </head>
+
 <body>
 
-    <header>
-        <h1>Real Estate Property Management</h1>
+<header>
+    <h1>Real Estate Property Management</h1>
 
-        <nav>
-            <a href="../../index.html">Home</a>
-            <a href="../listings/listings.html">Properties</a>
-            <a href="profile.html">Profile</a>
-            <a href="../contact/contact.html">Contact</a>
-        </nav>
-    </header>
+    <nav>
+        <a href="index.html">Home</a>
+<a href="listings/listings.html">Properties</a>
+<a href="profile.html">Profile</a>
+<a href="contact/contact.html">Contact</a>
+    </nav>
+</header>
 
-    <main>
-        <section class="profile-section">
-            <h2>User Profile</h2>
+<main>
+    <section class="profile-section">
 
-            <div class="profile-card">
+        <h2>User Profile</h2>
 
-                <div class="profile-image">
-                    <div class="avatar">👤</div>
-                    <h3>My Profile</h3>
+        <div class="profile-card" id="profileFormCard">
+
+            <div class="profile-image">
+                <div class="avatar">👤</div>
+                <h3>My Profile</h3>
+                <p>User / Owner</p>
+            </div>
+
+            <form class="profile-form" id="profileForm">
+
+                <h3 class="section-title">Personal Information</h3>
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name"
+                           placeholder="Enter your full name" required>
                 </div>
 
-                <form class="profile-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email"
+                           placeholder="Enter your email" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name"
-                               placeholder="Enter your full name" required>
-                    </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone"
+                           placeholder="Enter your phone number">
+                </div>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email"
-                               placeholder="Enter your email" required>
-                    </div>
+                <div class="form-group">
+                    <label for="location">Current Location</label>
+                    <input type="text" id="location"
+                           placeholder="Enter your location">
+                </div>
 
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone"
-                               placeholder="Enter your phone number">
-                    </div>
+                <div class="form-group">
+                    <label for="about">About Me</label>
+                    <textarea id="about" rows="4"
+                              placeholder="Tell us about yourself"></textarea>
+                </div>
 
-                    <div class="form-group">
-                        <label for="location">Location</label>
-                        <input type="text" id="location" name="location"
-                               placeholder="Enter your location">
-                    </div>
+                <h3 class="section-title">Property Preferences</h3>
 
-                    <div class="form-group">
-                        <label for="about">About Me</label>
-                        <textarea id="about" name="about" rows="4"
-                                  placeholder="Tell us about yourself"></textarea>
-                    </div>
+                <div class="form-group">
+                    <label for="property-type">Property Type</label>
+                    <select id="property-type">
+                        <option value="">Select Property Type</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="House">House</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Plot">Plot</option>
+                    </select>
+                </div>
 
-                    <div class="profile-actions">
-                        <button type="submit">Save Profile</button>
-                        <button type="reset">Clear</button>
-                    </div>
+                <div class="form-group">
+                    <label for="preferred-location">Preferred Location</label>
+                    <input type="text" id="preferred-location"
+                           placeholder="Enter preferred location">
+                </div>
 
-                </form>
+                <div class="form-group">
+                    <label for="budget">Budget Range</label>
+                    <input type="text" id="budget"
+                           placeholder="Enter your budget">
+                </div>
+
+                <div class="profile-actions">
+                    <button type="submit" id="saveProfile">
+                        Save Profile
+                    </button>
+
+                    <button type="reset" class="clear-button">
+                        Clear
+                    </button>
+                </div>
+
+                <p id="profileMessage"></p>
+
+            </form>
+        </div>
+
+        <div class="summary-card" id="summaryCard">
+
+            <h3>Profile Saved Successfully!</h3>
+
+            <div class="summary-content">
+
+                <p><strong>Name:</strong>
+                    <span id="summaryName"></span>
+                </p>
+
+                <p><strong>Email:</strong>
+                    <span id="summaryEmail"></span>
+                </p>
+
+                <p><strong>Phone:</strong>
+                    <span id="summaryPhone"></span>
+                </p>
+
+                <p><strong>Location:</strong>
+                    <span id="summaryLocation"></span>
+                </p>
+
+                <p><strong>About Me:</strong>
+                    <span id="summaryAbout"></span>
+                </p>
+
+                <p><strong>Property Type:</strong>
+                    <span id="summaryPropertyType"></span>
+                </p>
+
+                <p><strong>Preferred Location:</strong>
+                    <span id="summaryPreferredLocation"></span>
+                </p>
+
+                <p><strong>Budget:</strong>
+                    <span id="summaryBudget"></span>
+                </p>
 
             </div>
-        </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2026 Real Estate Property Management Platform</p>
-    </footer>
+            <div class="summary-actions">
+
+                <button id="editProfile">
+                    Edit Profile
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Real Estate Property Management Platform</p>
+</footer>
+
+<script src="profile.js"></script>
 
 </body>
 </html>
