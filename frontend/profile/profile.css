@@ -1,29 +1,31 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f8;
-    color: #333;
-    min-height: 100vh;
+    color: #222;
 }
 
 header {
-    background-color: #1f3c5b;
+    background-color: #1f4e79;
     color: white;
-    padding: 25px 8%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header h1 {
-    margin-bottom: 18px;
+    font-size: 24px;
 }
 
 nav {
     display: flex;
-    gap: 30px;
+    gap: 25px;
 }
 
 nav a {
@@ -37,32 +39,32 @@ nav a:hover {
 }
 
 main {
-    padding: 50px 8%;
+    min-height: 80vh;
+    padding: 40px 20px;
 }
 
 .profile-section {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: auto;
 }
 
 .profile-section > h2 {
     text-align: center;
-    margin-bottom: 35px;
-    font-size: 32px;
-    color: #1f3c5b;
+    color: #1f4e79;
+    margin-bottom: 30px;
 }
 
 .profile-card {
     background-color: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    gap: 50px;
+    border-radius: 10px;
+    padding: 35px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
 }
 
 .profile-image {
-    min-width: 190px;
     text-align: center;
 }
 
@@ -70,19 +72,18 @@ main {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background-color: #1f3c5b;
-    color: white;
+    background-color: #244b70;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 55px;
-    margin: auto;
+    font-size: 65px;
 }
 
 .profile-image h3 {
-    margin-top: 15px;
-    font-size: 20px;
-    color: #1f3c5b;
+    color: #1f4e79;
+    margin-top: 20px;
+    font-size: 22px;
 }
 
 .profile-image p {
@@ -91,14 +92,14 @@ main {
 }
 
 .profile-form {
-    flex: 1;
+    width: 100%;
 }
 
 .section-title {
-    color: #1f3c5b;
-    margin-bottom: 20px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #e5e5e5;
+    color: #1f4e79;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 .form-group {
@@ -107,18 +108,18 @@ main {
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
     font-weight: bold;
+    margin-bottom: 8px;
 }
 
 .form-group input,
-.form-group textarea,
-.form-group select {
+.form-group select,
+.form-group textarea {
     width: 100%;
-    padding: 12px;
+    padding: 13px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 15px;
+    font-size: 16px;
     font-family: Arial, sans-serif;
 }
 
@@ -126,11 +127,35 @@ main {
     resize: vertical;
 }
 
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: #1f3c5b;
+/* Current Location */
+
+.location-box {
+    display: flex;
+    gap: 10px;
+}
+
+.location-box input {
+    flex: 1;
+}
+
+#getLocation {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1f4e79;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#getLocation:hover {
+    background-color: #163a5c;
+}
+
+#locationMessage {
+    margin-top: 7px;
+    font-size: 13px;
 }
 
 .profile-actions {
@@ -144,125 +169,91 @@ main {
     padding: 12px 25px;
     border: none;
     border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-#saveProfile,
-#editProfile {
-    background-color: #1f3c5b;
+    background-color: #1f4e79;
     color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-#saveProfile:hover,
-#editProfile:hover {
-    background-color: #162d45;
+.profile-actions button:hover,
+.summary-actions button:hover {
+    background-color: #163a5c;
 }
 
 .clear-button {
-    background-color: #ddd;
-    color: #333;
+    background-color: #777 !important;
 }
 
 .clear-button:hover {
-    background-color: #ccc;
+    background-color: #555 !important;
 }
 
 #profileMessage {
-    margin-top: 20px;
+    margin-top: 15px;
     font-weight: bold;
 }
 
-.success-message {
-    color: green;
-}
-
-.error-message {
-    color: red;
-}
+/* Summary */
 
 .summary-card {
     display: none;
     background-color: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
 }
 
 .summary-card h3 {
-    color: #1f3c5b;
-    margin-bottom: 25px;
-    font-size: 24px;
-}
-
-.summary-content {
-    line-height: 1.8;
-    margin-bottom: 25px;
+    color: #1f4e79;
+    margin-bottom: 20px;
 }
 
 .summary-content p {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.summary-content strong {
+    color: #1f4e79;
 }
 
 .summary-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.continue-button {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: #1f3c5b;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.continue-button:hover {
-    background-color: #162d45;
+    margin-top: 20px;
 }
 
 footer {
-    background-color: #1f3c5b;
+    background-color: #1f4e79;
     color: white;
     text-align: center;
     padding: 18px;
-    margin-top: 30px;
 }
 
-@media (max-width: 700px) {
+/* Responsive */
 
-    nav {
+@media (max-width: 768px) {
+
+    header {
         flex-direction: column;
-        gap: 12px;
+        gap: 15px;
+        text-align: center;
     }
 
-    main {
-        padding: 30px 5%;
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .profile-card {
+        grid-template-columns: 1fr;
+    }
+
+    .location-box {
         flex-direction: column;
-        align-items: center;
-        padding: 25px;
     }
 
-    .profile-form {
+    #getLocation {
         width: 100%;
-    }
-
-    .profile-actions,
-    .summary-actions {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .summary-card {
-        padding: 25px;
     }
 }

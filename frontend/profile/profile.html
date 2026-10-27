@@ -14,9 +14,9 @@
 
     <nav>
         <a href="index.html">Home</a>
-<a href="listings/listings.html">Properties</a>
-<a href="profile.html">Profile</a>
-<a href="contact/contact.html">Contact</a>
+        <a href="listings/listings.html">Properties</a>
+        <a href="profile.html">Profile</a>
+        <a href="contact/contact.html">Contact</a>
     </nav>
 </header>
 
@@ -39,31 +39,53 @@
 
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name"
-                           placeholder="Enter your full name" required>
+                    <input type="text"
+                           id="name"
+                           placeholder="Enter your full name"
+                           required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email"
-                           placeholder="Enter your email" required>
+                    <input type="email"
+                           id="email"
+                           placeholder="Enter your email"
+                           required>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone"
+                    <input type="tel"
+                           id="phone"
                            placeholder="Enter your phone number">
                 </div>
 
+               
                 <div class="form-group">
+
                     <label for="location">Current Location</label>
-                    <input type="text" id="location"
-                           placeholder="Enter your location">
+
+                    <div class="location-box">
+
+                        <input type="text"
+                               id="location"
+                               placeholder="Enter your location">
+
+                        <button type="button" id="getLocation">
+                             Use My Current Location++3w
+                        </button>
+
+                    </div>
+
+                    <p id="locationMessage"></p>
+
                 </div>
 
                 <div class="form-group">
                     <label for="about">About Me</label>
-                    <textarea id="about" rows="4"
+
+                    <textarea id="about"
+                              rows="4"
                               placeholder="Tell us about yourself"></textarea>
                 </div>
 
@@ -71,28 +93,52 @@
 
                 <div class="form-group">
                     <label for="property-type">Property Type</label>
+
                     <select id="property-type">
-                        <option value="">Select Property Type</option>
-                        <option value="Apartment">Apartment</option>
-                        <option value="House">House</option>
-                        <option value="Villa">Villa</option>
-                        <option value="Plot">Plot</option>
+
+                        <option value="">
+                            Select Property Type
+                        </option>
+
+                        <option value="Apartment">
+                            Apartment
+                        </option>
+
+                        <option value="House">
+                            House
+                        </option>
+
+                        <option value="Villa">
+                            Villa
+                        </option>
+
+                        <option value="Plot">
+                            Plot
+                        </option>
+
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="preferred-location">Preferred Location</label>
-                    <input type="text" id="preferred-location"
+                    <label for="preferred-location">
+                        Preferred Location
+                    </label>
+
+                    <input type="text"
+                           id="preferred-location"
                            placeholder="Enter preferred location">
                 </div>
 
                 <div class="form-group">
                     <label for="budget">Budget Range</label>
-                    <input type="text" id="budget"
+
+                    <input type="text"
+                           id="budget"
                            placeholder="Enter your budget">
                 </div>
 
                 <div class="profile-actions">
+
                     <button type="submit" id="saveProfile">
                         Save Profile
                     </button>
@@ -100,12 +146,16 @@
                     <button type="reset" class="clear-button">
                         Clear
                     </button>
+
                 </div>
 
                 <p id="profileMessage"></p>
 
             </form>
+
         </div>
+
+        <!-- Profile Summary -->
 
         <div class="summary-card" id="summaryCard">
 
@@ -113,35 +163,43 @@
 
             <div class="summary-content">
 
-                <p><strong>Name:</strong>
+                <p>
+                    <strong>Name:</strong>
                     <span id="summaryName"></span>
                 </p>
 
-                <p><strong>Email:</strong>
+                <p>
+                    <strong>Email:</strong>
                     <span id="summaryEmail"></span>
                 </p>
 
-                <p><strong>Phone:</strong>
+                <p>
+                    <strong>Phone:</strong>
                     <span id="summaryPhone"></span>
                 </p>
 
-                <p><strong>Location:</strong>
+                <p>
+                    <strong>Location:</strong>
                     <span id="summaryLocation"></span>
                 </p>
 
-                <p><strong>About Me:</strong>
+                <p>
+                    <strong>About Me:</strong>
                     <span id="summaryAbout"></span>
                 </p>
 
-                <p><strong>Property Type:</strong>
+                <p>
+                    <strong>Property Type:</strong>
                     <span id="summaryPropertyType"></span>
                 </p>
 
-                <p><strong>Preferred Location:</strong>
+                <p>
+                    <strong>Preferred Location:</strong>
                     <span id="summaryPreferredLocation"></span>
                 </p>
 
-                <p><strong>Budget:</strong>
+                <p>
+                    <strong>Budget:</strong>
                     <span id="summaryBudget"></span>
                 </p>
 
@@ -153,7 +211,6 @@
                     Edit Profile
                 </button>
 
-
             </div>
 
         </div>
@@ -162,7 +219,9 @@
 </main>
 
 <footer>
-    <p>&copy; 2026 Real Estate Property Management Platform</p>
+    <p>
+        &copy; 2026 Real Estate Property Management Platform
+    </p>
 </footer>
 
 <script src="profile.js"></script>

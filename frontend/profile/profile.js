@@ -1,81 +1,107 @@
-const form = document.getElementById("profileForm");
-const formCard = document.getElementById("profileFormCard");
+const profileForm = document.getElementById("profileForm");
+const profileFormCard = document.getElementById("profileFormCard");
 const summaryCard = document.getElementById("summaryCard");
 
-form.addEventListener("submit", function(event) {
-    event.preventDefault();
+const getLocationButton = document.getElementById("getLocation");
+const locationInput = document.getElementById("location");
+const locationMessage = document.getElementById("locationMessage");
 
-    const profile = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value,
-        location: document.getElementById("location").value,
-        about: document.getElementById("about").value,
-        propertyType: document.getElementById("property-type").value,
-        preferredLocation: document.getElementById("preferred-location").value,
-        budget: document.getElementById("budget").value
-    };
 
-    if (profile.name === "" || profile.email === "") {
-        alert("Please enter Name and Email");
+
+
+getLocationButton.addEventListener("click", function () {
+
+    if (!navigator.geolocation) {
+
+        locationMessage.textContent =
+            "Geolocation is not supported by your browser.";
+
         return;
     }
 
-    localStorage.setItem("userProfile", JSON.stringify(profile));
+    locationMessage.textContent =
+        "Getting your current location...";
 
-    showProfile(profile);
+    navigator.geolocation.getCurrentPosition(
+
+        function (position) {
+
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            locationInput.value =
+                `Latitude: ${latitude.toFixed(6)}, Longitude: ${longitude.toFixed(6)}`;
+
+            locationMessage.textContent =
+                "Current location detected successfully.";
+
+        },
+
+        function () {
+
+            locationMessage.textContent =
+                "Location access denied. Please allow location permission.";
+
+        }
+
+    );
+
 });
 
-function showProfile(profile) {
 
-    document.getElementById("summaryName").innerText = profile.name;
-    document.getElementById("summaryEmail").innerText = profile.email;
-    document.getElementById("summaryPhone").innerText =
-        profile.phone || "Not provided";
-    document.getElementById("summaryLocation").innerText =
-        profile.location || "Not provided";
-    document.getElementById("summaryAbout").innerText =
-        profile.about || "Not provided";
-    document.getElementById("summaryPropertyType").innerText =
-        profile.propertyType || "Not provided";
-    document.getElementById("summaryPreferredLocation").innerText =
-        profile.preferredLocation || "Not provided";
-    document.getElementById("summaryBudget").innerText =
-        profile.budget || "Not provided";
 
-    formCard.style.display = "none";
+profileForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    document.getElementById("summaryName").textContent =
+        document.getElementById("name").value;
+
+    document.getElementById("summaryEmail").textContent =
+        document.getElementById("email").value;
+
+    document.getElementById("summaryPhone").textContent =
+        document.getElementById("phone").value;
+
+    document.getElementById("summaryLocation").textContent =
+        document.getElementById("location").value;
+
+    document.getElementById("summaryAbout").textContent =
+        document.getElementById("about").value;
+
+    document.getElementById("summaryPropertyType").textContent =
+        document.getElementById("property-type").value;
+
+    document.getElementById("summaryPreferredLocation").textContent =
+        document.getElementById("preferred-location").value;
+
+    document.getElementById("summaryBudget").textContent =
+        document.getElementById("budget").value;
+
+    profileFormCard.style.display = "none";
+
     summaryCard.style.display = "block";
-}
 
-document.getElementById("editProfile").addEventListener("click", function() {
+});
 
-    const data = localStorage.getItem("userProfile");
 
-    if (data) {
+// Edit Profile
 
-        const profile = JSON.parse(data);
+document.getElementById("editProfile").addEventListener("click", function () {
 
-        document.getElementById("name").value = profile.name;
-        document.getElementById("email").value = profile.email;
-        document.getElementById("phone").value = profile.phone;
-        document.getElementById("location").value = profile.location;
-        document.getElementById("about").value = profile.about;
-        document.getElementById("property-type").value = profile.propertyType;
-        document.getElementById("preferred-location").value =
-            profile.preferredLocation;
-        document.getElementById("budget").value = profile.budget;
-    }
+    profileFormCard.style.display = "grid";
 
     summaryCard.style.display = "none";
-    formCard.style.display = "flex";
+
 });
 
-window.addEventListener("DOMContentLoaded", function() {
 
-    const data = localStorage.getItem("userProfile");
+// Clear Message
 
-    if (data) {
-        const profile = JSON.parse(data);
-        showProfile(profile);
-    }
+profileForm.addEventListener("reset", function () {
+
+    locationMessage.textContent = "";
+
+    document.getElementById("profileMessage").textContent = "";
+
 });
