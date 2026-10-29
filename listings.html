@@ -36,102 +36,29 @@
 
     <div class="results-bar">
       <h2>Available Properties</h2>
-      <span>6 results</span>
+      <span id="result-count"></span>
     </div>
 
-    <div class="property-grid">
-
-      <article class="property-card">
-        <div class="photo">
-          <span class="tag">Villa</span>
-          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=80" alt="Modern villa with garden">
-        </div>
-        <div class="body">
-          <h3>Krishna Vihar Villa</h3>
-          <p class="location">Vrindavan Road, Mathura</p>
-          <div class="card-footer">
-            <span class="price">₹ 1.85 Cr</span>
-            <a href="property.html" class="view-link">View Details</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="property-card">
-        <div class="photo">
-          <span class="tag">Apartment</span>
-          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Modern apartment building">
-        </div>
-        <div class="body">
-          <h3>Radha Residency, 3BHK</h3>
-          <p class="location">Chaitanya Vihar, Mathura</p>
-          <div class="card-footer">
-            <span class="price">₹ 78 L</span>
-            <a href="property.html" class="view-link">View Details</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="property-card">
-        <div class="photo">
-          <span class="tag">Independent House</span>
-          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80" alt="Independent house with lawn">
-        </div>
-        <div class="body">
-          <h3>Yamuna Kunj Residence</h3>
-          <p class="location">Deeg Gate, Mathura</p>
-          <div class="card-footer">
-            <span class="price">₹ 1.1 Cr</span>
-            <a href="property.html" class="view-link">View Details</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="property-card">
-        <div class="photo">
-          <span class="tag">Apartment</span>
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Bright apartment interior">
-        </div>
-        <div class="body">
-          <h3>Govind Nagar Residency, 2BHK</h3>
-          <p class="location">Govind Nagar, Mathura</p>
-          <div class="card-footer">
-            <span class="price">₹ 52 L</span>
-            <a href="property.html" class="view-link">View Details</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="property-card">
-        <div class="photo">
-          <span class="tag">Plot</span>
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80" alt="Open residential plot">
-        </div>
-        <div class="body">
-          <h3>GLA Enclave Plot #14</h3>
-          <p class="location">NH-19, Near GLA University, Mathura</p>
-          <div class="card-footer">
-            <span class="price">₹ 34 L</span>
-            <a href="property.html" class="view-link">View Details</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="property-card">
-        <div class="photo">
-          <span class="tag">Villa</span>
-          <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=600&q=80" alt="Luxury villa exterior">
-        </div>
-        <div class="body">
-          <h3>Vrindavan Heights Villa</h3>
-          <p class="location">Parikrama Marg, Vrindavan, Mathura</p>
-          <div class="card-footer">
-            <span class="price">₹ 2.4 Cr</span>
-            <a href="property.html" class="view-link">View Details</a>
-          </div>
-        </div>
-      </article>
-
+    <div class="controls">
+      <input type="text" id="search-box" placeholder="Search by name or location...">
+      <select id="sort-select">
+        <option value="default">Sort: Default</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+      </select>
     </div>
+
+    <div class="filter-bar">
+      <button type="button" class="filter-btn active" data-type="All">All</button>
+      <button type="button" class="filter-btn" data-type="Villa">Villa</button>
+      <button type="button" class="filter-btn" data-type="Apartment">Apartment</button>
+      <button type="button" class="filter-btn" data-type="Independent House">Independent House</button>
+      <button type="button" class="filter-btn" data-type="Plot">Plot</button>
+      <button type="button" class="filter-btn" data-type="Favorites">♥ Favorites</button>
+    </div>
+
+    <div class="property-grid" id="property-grid"></div>
+
   </div>
 </section>
 
@@ -148,6 +75,9 @@
     <p class="footer-note">Real Estate Property Management Platform — Mini Project, GLA University.</p>
   </div>
 </footer>
+
+<script src="js/data.js"></script>
+<script src="js/listings.js"></script>
 
 </body>
 </html>
