@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,27 +11,72 @@
 <body>
 
 <header>
-    <h1>Real Estate Property Management</h1>
+    <h1>EstateHub</h1>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="listings/listings.html">Properties</a>
+        <a href="../../index.html">Home</a>
+        <a href="../listings/listings.html">Properties</a>
         <a href="profile.html">Profile</a>
-        <a href="contact/contact.html">Contact</a>
+        <a href="../contact/contact.html">Contact</a>
     </nav>
 </header>
 
 <main>
     <section class="profile-section">
 
-        <h2>User Profile</h2>
+        <h2>My Dashboard</h2>
 
+        <!-- Profile Banner -->
+        <div class="profile-banner">
+            <div class="banner-content">
+                <p class="banner-tag">YOUR PERSONAL SPACE</p>
+                <h2>Welcome to Your Profile</h2>
+                <p>Manage your profile and discover properties that match your lifestyle.</p>
+            </div>
+        </div>
+
+        <!-- Profile Form Card -->
         <div class="profile-card" id="profileFormCard">
 
             <div class="profile-image">
-                <div class="avatar">👤</div>
+                <div class="avatar" id="avatarContainer">
+    <img id="profilePhoto" src="" alt="Profile Photo">
+    <span id="avatarPlaceholder">👤</span>
+</div>
+
+<label for="photoUpload" class="upload-photo-btn">
+    📷 Upload Profile Photo
+</label>
+
+<input type="file"
+       id="photoUpload"
+       accept="image/*"
+       hidden>
+
+<p id="photoMessage"></p>
                 <h3>My Profile</h3>
-                <p>User / Owner</p>
+                <p>Property Explorer</p>
+
+                <div class="profile-stats">
+                    <div>
+                        <strong>01</strong>
+                        <span>Profile</span>
+                    </div>
+
+                    <div>
+                        <strong>08</strong>
+                        <span>Details</span>
+                    </div>
+
+                    <div>
+                        <strong>∞</strong>
+                        <span>Dreams</span>
+                    </div>
+                </div>
+
+                <div class="profile-note">
+                    <p>✨ Create your personal space and set your property preferences.</p>
+                </div>
             </div>
 
             <form class="profile-form" id="profileForm">
@@ -60,33 +106,27 @@
                            placeholder="Enter your phone number">
                 </div>
 
-               
                 <div class="form-group">
-
                     <label for="location">Current Location</label>
 
                     <div class="location-box">
-
                         <input type="text"
                                id="location"
                                placeholder="Enter your location">
 
                         <button type="button" id="getLocation">
-                             Use My Current Location++3w
+                            📍 Use My Location
                         </button>
-
                     </div>
 
                     <p id="locationMessage"></p>
-
                 </div>
 
                 <div class="form-group">
                     <label for="about">About Me</label>
-
                     <textarea id="about"
                               rows="4"
-                              placeholder="Tell us about yourself"></textarea>
+                              placeholder="Tell us something about yourself"></textarea>
                 </div>
 
                 <h3 class="section-title">Property Preferences</h3>
@@ -95,35 +135,16 @@
                     <label for="property-type">Property Type</label>
 
                     <select id="property-type">
-
-                        <option value="">
-                            Select Property Type
-                        </option>
-
-                        <option value="Apartment">
-                            Apartment
-                        </option>
-
-                        <option value="House">
-                            House
-                        </option>
-
-                        <option value="Villa">
-                            Villa
-                        </option>
-
-                        <option value="Plot">
-                            Plot
-                        </option>
-
+                        <option value="">Select Property Type</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="House">House</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Plot">Plot</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="preferred-location">
-                        Preferred Location
-                    </label>
-
+                    <label for="preferred-location">Preferred Location</label>
                     <input type="text"
                            id="preferred-location"
                            placeholder="Enter preferred location">
@@ -131,97 +152,79 @@
 
                 <div class="form-group">
                     <label for="budget">Budget Range</label>
-
                     <input type="text"
                            id="budget"
                            placeholder="Enter your budget">
                 </div>
 
                 <div class="profile-actions">
-
-                    <button type="submit" id="saveProfile">
-                        Save Profile
-                    </button>
-
-                    <button type="reset" class="clear-button">
-                        Clear
-                    </button>
-
+                    <button type="submit" id="saveProfile">Save Profile</button>
+                    <button type="reset" class="clear-button">Clear</button>
                 </div>
 
                 <p id="profileMessage"></p>
 
             </form>
-
         </div>
 
         <!-- Profile Summary -->
-
         <div class="summary-card" id="summaryCard">
 
-            <h3>Profile Saved Successfully!</h3>
+            <h3>✨ Your Profile Overview</h3>
 
             <div class="summary-content">
-
-                <p>
-                    <strong>Name:</strong>
-                    <span id="summaryName"></span>
-                </p>
-
-                <p>
-                    <strong>Email:</strong>
-                    <span id="summaryEmail"></span>
-                </p>
-
-                <p>
-                    <strong>Phone:</strong>
-                    <span id="summaryPhone"></span>
-                </p>
-
-                <p>
-                    <strong>Location:</strong>
-                    <span id="summaryLocation"></span>
-                </p>
-
-                <p>
-                    <strong>About Me:</strong>
-                    <span id="summaryAbout"></span>
-                </p>
-
-                <p>
-                    <strong>Property Type:</strong>
-                    <span id="summaryPropertyType"></span>
-                </p>
-
-                <p>
-                    <strong>Preferred Location:</strong>
-                    <span id="summaryPreferredLocation"></span>
-                </p>
-
-                <p>
-                    <strong>Budget:</strong>
-                    <span id="summaryBudget"></span>
-                </p>
-
+                <p><strong>Name:</strong> <span id="summaryName"></span></p>
+                <p><strong>Email:</strong> <span id="summaryEmail"></span></p>
+                <p><strong>Phone:</strong> <span id="summaryPhone"></span></p>
+                <p><strong>Location:</strong> <span id="summaryLocation"></span></p>
+                <p><strong>About Me:</strong> <span id="summaryAbout"></span></p>
+                <p><strong>Property Type:</strong> <span id="summaryPropertyType"></span></p>
+                <p><strong>Preferred Location:</strong> <span id="summaryPreferredLocation"></span></p>
+                <p><strong>Budget:</strong> <span id="summaryBudget"></span></p>
             </div>
 
             <div class="summary-actions">
-
-                <button id="editProfile">
-                    Edit Profile
-                </button>
-
+                <button id="editProfile">✏️ Edit Profile</button>
             </div>
 
         </div>
+
+        <!-- Property Inspiration -->
+        <section class="inspiration-section">
+            <div class="inspiration-heading">
+                <p>EXPLORE YOUR POSSIBILITIES</p>
+                <h2>Find a place you can call home.</h2>
+                <span>Every great journey starts with the right place.</span>
+            </div>
+
+            <div class="inspiration-grid">
+
+                <div class="inspiration-card apartment-card">
+                    <div class="inspiration-icon">🏢</div>
+                    <h3>Modern Apartments</h3>
+                    <p>Explore contemporary spaces designed for modern living.</p>
+                </div>
+
+                <div class="inspiration-card home-card">
+                    <div class="inspiration-icon">🏡</div>
+                    <h3>Dream Homes</h3>
+                    <p>Discover homes that bring comfort and warmth to everyday life.</p>
+                </div>
+
+                <div class="inspiration-card villa-card">
+                    <div class="inspiration-icon">🌿</div>
+                    <h3>Luxury Villas</h3>
+            <p>Explore spacious properties with a touch of elegance.</p>
+                </div>
+
+            </div>
+        </section>
 
     </section>
 </main>
 
 <footer>
-    <p>
-        &copy; 2026 Real Estate Property Management Platform
-    </p>
+    <p>&copy; 2026 EstateHub | Real Estate Property Management</p>
 </footer>
 
 <script src="profile.js"></script>

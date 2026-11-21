@@ -121,3 +121,53 @@ clearButton.addEventListener("click", function () {
     profileMessage.textContent = "";
     locationMessage.textContent = "";
 });
+// Profile Photo Upload
+const photoUpload = document.getElementById("photoUpload");
+const profilePhoto = document.getElementById("profilePhoto");
+const avatarPlaceholder = document.getElementById("avatarPlaceholder");
+const photoMessage = document.getElementById("photoMessage");
+
+photoUpload.addEventListener("change", function () {
+    const file = photoUpload.files[0];
+
+    if (!file) return;
+
+    if (file.size > 1024 * 1024) {
+        photoMessage.textContent = "Photo must be smaller than 1 MB.";
+        photoUpload.value = "";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function () {
+        profilePhoto.src = reader.result;
+        profilePhoto.style.display = "block";
+        avatarPlaceholder.style.display = "none";
+
+        localStorage.setItem("profilePhoto", reader.result);
+        photoMessage.textContent = "Photo uploaded successfully!";
+    };
+
+    reader.readAsDataURL(file);
+});
+
+// Load saved photo
+const savedPhoto = localStorage.getItem("profilePhoto");
+
+if (savedPhoto) {
+    profilePhoto.src = savedPhoto;
+    profilePhoto.style.display = "block";
+    avatarPlaceholder.style.display = "none";
+}
+
+// Remove photo when Clear is clicked
+clearButton.addEventListener("click", function () {
+    localStorage.removeItem("profilePhoto");
+
+    profilePhoto.src = "";
+    profilePhoto.style.display = "none";
+    avatarPlaceholder.style.display = "flex";
+    photoUpload.value = "";
+    photoMessage.textContent = "";
+});
