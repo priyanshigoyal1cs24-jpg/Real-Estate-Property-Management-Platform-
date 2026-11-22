@@ -17,6 +17,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="listings.html" class="active">Listings</a></li>
+        <li><a href="add-property.html">Add Property</a></li>
         <li><a href="property.html">Property Details</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -34,6 +35,8 @@
 <section class="listings-section">
   <div class="wrap">
 
+    <div id="flash" class="flash"></div>
+
     <div class="results-bar">
       <h2>Available Properties</h2>
       <span id="result-count"></span>
@@ -41,10 +44,31 @@
 
     <div class="controls">
       <input type="text" id="search-box" placeholder="Search by name or location...">
-      <select id="sort-select">
+      <select id="price-select" aria-label="Price range">
+        <option value="all">Any price</option>
+        <option value="under50">Under ₹ 50 L</option>
+        <option value="50to100">₹ 50 L – 1 Cr</option>
+        <option value="100to200">₹ 1 Cr – 2 Cr</option>
+        <option value="above200">Above ₹ 2 Cr</option>
+      </select>
+      <select id="bedroom-select" aria-label="Bedrooms">
+        <option value="any">Any bedrooms</option>
+        <option value="1">1+ bedrooms</option>
+        <option value="2">2+ bedrooms</option>
+        <option value="3">3+ bedrooms</option>
+        <option value="4">4+ bedrooms</option>
+      </select>
+      <select id="status-select" aria-label="Status">
+        <option value="all">Any status</option>
+        <option value="Available">Available</option>
+        <option value="Sold">Sold</option>
+        <option value="Rented">Rented</option>
+      </select>
+      <select id="sort-select" aria-label="Sort">
         <option value="default">Sort: Default</option>
         <option value="low">Price: Low to High</option>
         <option value="high">Price: High to Low</option>
+        <option value="newest">Newest first</option>
       </select>
     </div>
 
@@ -55,9 +79,15 @@
       <button type="button" class="filter-btn" data-type="Independent House">Independent House</button>
       <button type="button" class="filter-btn" data-type="Plot">Plot</button>
       <button type="button" class="filter-btn" data-type="Favorites">♥ Favorites</button>
+      <button type="button" class="ghost-btn" id="clear-filters">Clear filters</button>
     </div>
 
     <div class="property-grid" id="property-grid"></div>
+
+    <p class="reset-row">
+      <a href="add-property.html" class="action-link">+ Add a new property</a>
+      <button type="button" class="action-delete" id="reset-data">Reset demo data</button>
+    </p>
 
   </div>
 </section>
