@@ -530,3 +530,328 @@ footer.site-footer {
 
 .form-msg.error { color: #b03a2e; }
 .form-msg.success { color: var(--forest); }
+
+
+/* =========================================================
+   Property module additions: badges, edit/delete, extra
+   filters, Add/Edit form, EMI calculator, map, similar
+   ========================================================= */
+
+/* ---------- Status and featured badges ---------- */
+.status-badge,
+.featured-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  padding: 4px 10px;
+  color: #fff;
+}
+
+.property-card .status-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+}
+
+.property-card .featured-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
+
+.status-available { background: #2e7d4f; }
+.status-sold { background: #b03a2e; }
+.status-rented { background: #b9770e; }
+.featured-badge { background: var(--brass); }
+
+.badge-row {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+/* ---------- Edit / delete links and small buttons ---------- */
+.card-actions {
+  display: flex;
+  gap: 18px;
+  margin-top: 12px;
+  font-size: 0.82rem;
+}
+
+.action-link {
+  color: var(--forest-deep);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 1px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.action-link:hover { color: var(--brass-deep); border-bottom-color: var(--brass); }
+
+.action-delete {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #b03a2e;
+  cursor: pointer;
+}
+
+.action-delete:hover { text-decoration: underline; }
+
+.manage-row {
+  display: flex;
+  gap: 22px;
+  margin: 0 0 26px;
+  font-size: 0.9rem;
+}
+
+.ghost-btn {
+  padding: 8px 18px;
+  border: 1px dashed var(--brass);
+  background: transparent;
+  color: var(--brass-deep);
+  font-family: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.ghost-btn:hover { background: var(--card); }
+
+.reset-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 34px 0 0;
+  font-size: 0.88rem;
+}
+
+/* ---------- Message at the top of the listings ---------- */
+.flash {
+  display: none;
+  background: #e6f1ea;
+  border: 1px solid #b9d7c4;
+  color: var(--forest-deep);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 0.92rem;
+}
+
+.flash.show { display: block; }
+
+/* ---------- Add / Edit property form ---------- */
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 30px;
+  max-width: 780px;
+  margin: 36px auto 70px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-grid .full { grid-column: 1 / -1; }
+
+.form-card label {
+  display: block;
+  font-weight: 500;
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+}
+
+.form-card input,
+.form-card select,
+.form-card textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--charcoal);
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+  outline: none;
+  border-color: var(--brass);
+}
+
+.form-card textarea { min-height: 120px; resize: vertical; }
+
+.check-row { display: flex; align-items: center; gap: 10px; }
+.check-row input { width: auto; }
+.check-row label { margin: 0; }
+
+.form-card input[type="file"] { padding: 9px; background: transparent; }
+
+.image-add { display: flex; gap: 10px; }
+
+.btn-small {
+  padding: 10px 18px;
+  border: 1px solid var(--forest);
+  background: var(--forest);
+  color: var(--sand);
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-small:hover { background: var(--forest-deep); }
+
+.hint { color: var(--muted); font-size: 0.82rem; margin: 12px 0 6px; }
+
+.image-preview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.preview-item {
+  position: relative;
+  height: 90px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.preview-item img { width: 100%; height: 100%; object-fit: cover; }
+
+.preview-item button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.preview-item span {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: var(--brass);
+  color: #fff;
+  font-size: 0.65rem;
+  padding: 2px 8px;
+}
+
+.form-message {
+  margin: 18px 0 0;
+  min-height: 1.3em;
+  color: #b03a2e;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 14px;
+}
+
+.form-btn {
+  background: var(--forest);
+  color: var(--sand);
+  border: none;
+  padding: 13px 30px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form-btn:hover { background: var(--brass-deep); }
+
+/* ---------- Map and EMI calculator (details page) ---------- */
+.map-frame {
+  width: 100%;
+  height: 300px;
+  border: 1px solid var(--line);
+  margin-bottom: 10px;
+}
+
+.emi-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 22px;
+  margin-bottom: 30px;
+}
+
+.emi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.emi-box label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.emi-box input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font: inherit;
+}
+
+.emi-result {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.emi-result .num {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--brass-deep);
+}
+
+.emi-result .label { color: var(--muted); font-size: 0.8rem; }
+
+.similar-section { margin-top: 56px; }
+.similar-section .property-grid { margin-top: 18px; }
+
+.similar-section h2.section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---------- Responsive for the new parts ---------- */
+@media (max-width: 900px) {
+  .controls select { flex: 1; min-width: 150px; }
+}
+
+@media (max-width: 620px) {
+  .form-card { padding: 20px; margin: 24px 16px 50px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .image-add { flex-direction: column; }
+  .image-preview { grid-template-columns: repeat(2, 1fr); }
+  .emi-grid, .emi-result { grid-template-columns: 1fr; }
+  .reset-row { flex-direction: column; gap: 12px; }
+}
