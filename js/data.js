@@ -1,9 +1,12 @@
-// All property data lives here.
-// listings.js and property.js both read from this array.
+// All the built-in property data lives here.
+// status can be "Available", "Sold" or "Rented". featured: true shows a Featured badge.
+// Properties the user adds, edits or deletes are saved in the browser (see the bottom of this file).
 
 var properties = [
   {
     id: 1,
+    status: "Available",
+    featured: true,
     title: "Krishna Vihar Villa",
     type: "Villa",
     location: "Vrindavan Road, Mathura",
@@ -20,6 +23,8 @@ var properties = [
   },
   {
     id: 2,
+    status: "Available",
+    featured: false,
     title: "Radha Residency, 3BHK",
     type: "Apartment",
     location: "Chaitanya Vihar, Mathura",
@@ -36,6 +41,8 @@ var properties = [
   },
   {
     id: 3,
+    status: "Sold",
+    featured: false,
     title: "Yamuna Kunj Residence",
     type: "Independent House",
     location: "Deeg Gate, Mathura",
@@ -52,6 +59,8 @@ var properties = [
   },
   {
     id: 4,
+    status: "Available",
+    featured: false,
     title: "Govind Nagar Residency, 2BHK",
     type: "Apartment",
     location: "Govind Nagar, Mathura",
@@ -68,6 +77,8 @@ var properties = [
   },
   {
     id: 5,
+    status: "Available",
+    featured: false,
     title: "GLA Enclave Plot #14",
     type: "Plot",
     location: "NH-19, Near GLA University, Mathura",
@@ -84,6 +95,8 @@ var properties = [
   },
   {
     id: 6,
+    status: "Available",
+    featured: true,
     title: "Vrindavan Heights Villa",
     type: "Villa",
     location: "Parikrama Marg, Vrindavan, Mathura",
@@ -100,7 +113,215 @@ var properties = [
   }
 ];
 
-// Builds the full image link from a photo id and a width
+
+// Builds the full image link from a photo id and a width.
+// A full link (http...) or an uploaded image (data:...) is used as it is.
 function getImage(id, width) {
-  return "https://images.unsplash.com/photo-" + id + "?auto=format&fit=crop&w=" + width + "&q=80";
+  var text = String(id);
+  if (text.indexOf("http") === 0 || text.indexOf("data:") === 0) {
+    return text;
+  }
+  return "https://images.unsplash.com/photo-" + text + "?auto=format&fit=crop&w=" + width + "&q=80";
 }
+
+// ---------- Small helpers ----------
+
+// Stops text typed by the user from breaking the page
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+// Turns 7800000 into "₹ 78 L" and 18500000 into "₹ 1.85 Cr"
+function formatPrice(price) {
+  if (price >= 10000000) {
+    return "₹ " + (price / 10000000).toFixed(2).replace(/\.?0+$/, "") + " Cr";
+  }
+  if (price >= 100000) {
+    return "₹ " + (price / 100000).toFixed(2).replace(/\.?0+$/, "") + " L";
+  }
+  return "₹ " + price.toLocaleString("en-IN");
+}
+
+// Finds one property in a list by its id (returns null if it is not there)
+function findById(list, id) {
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].id === id) {
+      return list[i];
+    }
+  }
+  return null;
+}
+
+// ---------- Saving in the browser (localStorage) ----------
+// "userProperties" = properties the user added OR edited
+// "deletedIds"     = ids of built-in properties the user deleted
+
+function readList(key) {
+  try {
+    var saved = localStorage.getItem(key);
+    if (saved) {
+      var list = JSON.parse(saved);
+      if (Array.isArray(list)) {
+        return list;
+      }
+    }
+  } catch (e) {}
+  return [];
+}
+
+function writeList(key, list) {
+  try {
+    localStorage.setItem(key, JSON.stringify(list));
+    return true;
+  } catch (e) {
+    return false; // for example, the browser storage is full
+  }
+}
+
+function getSavedProperties() {
+  return readList("userProperties");
+}
+
+function saveUserProperties(list) {
+  return writeList("userProperties", list);
+}
+
+function getDeletedIds() {
+  return readList("deletedIds");
+}
+
+function saveDeletedIds(list) {
+  return writeList("deletedIds", list);
+}
+
+// ---------- Putting the full list together ----------
+
+var builtInProperties = properties; // the properties written at the top of this file
+
+function isBuiltIn(id) {
+  return findById(builtInProperties, id) !== null;
+}
+
+// Makes sure every property has a status and a featured value
+function fillDefaults(p) {
+  if (!p.status) {
+    p.status = "Available";
+  }
+  p.featured = p.featured === true;
+  return p;
+}
+
+// Built-in + added + edited properties, without the deleted ones
+function loadAllProperties() {
+  var saved = getSavedProperties();
+  var deleted = getDeletedIds();
+  var all = [];
+
+  for (var i = 0; i < builtInProperties.length; i++) {
+    var original = builtInProperties[i];
+    if (deleted.indexOf(original.id) === -1) {
+      var edited = findById(saved, original.id);
+      all.push(fillDefaults(edited ? edited : original));
+    }
+  }
+
+  for (var j = 0; j < saved.length; j++) {
+    var isNew = !isBuiltIn(saved[j].id);
+    if (isNew && deleted.indexOf(saved[j].id) === -1) {
+      all.push(fillDefaults(saved[j]));
+    }
+  }
+
+  return all;
+}
+
+// The next free id for a new property
+function getNextId() {
+  var maxId = 0;
+  var lists = [builtInProperties, getSavedProperties()];
+  for (var i = 0; i < lists.length; i++) {
+    for (var j = 0; j < lists[i].length; j++) {
+      if (lists[i][j].id > maxId) {
+        maxId = lists[i][j].id;
+      }
+    }
+  }
+  return maxId + 1;
+}
+
+// Saves a new property, or replaces the one with the same id. Returns true or false.
+function saveProperty(p) {
+  var saved = getSavedProperties();
+  var replaced = false;
+
+  for (var i = 0; i < saved.length; i++) {
+    if (saved[i].id === p.id) {
+      saved[i] = p;
+      replaced = true;
+    }
+  }
+  if (!replaced) {
+    saved.push(p);
+  }
+  return saveUserProperties(saved);
+}
+
+// Deletes a property (built-in ones are hidden, added ones are removed)
+function deleteProperty(id) {
+  var saved = getSavedProperties();
+  var kept = [];
+  for (var i = 0; i < saved.length; i++) {
+    if (saved[i].id !== id) {
+      kept.push(saved[i]);
+    }
+  }
+  saveUserProperties(kept);
+
+  if (isBuiltIn(id)) {
+    var deleted = getDeletedIds();
+    if (deleted.indexOf(id) === -1) {
+      deleted.push(id);
+      saveDeletedIds(deleted);
+    }
+  }
+
+  // Also remove it from the saved favorites
+  var favorites = readList("favorites");
+  var index = favorites.indexOf(id);
+  if (index !== -1) {
+    favorites.splice(index, 1);
+    writeList("favorites", favorites);
+  }
+}
+
+// Brings back the original demo data
+function resetAllChanges() {
+  try {
+    localStorage.removeItem("userProperties");
+    localStorage.removeItem("deletedIds");
+  } catch (e) {}
+}
+
+// A short message that is shown once on the next page (like "Property saved")
+function setFlash(text) {
+  try {
+    sessionStorage.setItem("flash", text);
+  } catch (e) {}
+}
+
+function takeFlash() {
+  try {
+    var text = sessionStorage.getItem("flash");
+    sessionStorage.removeItem("flash");
+    return text;
+  } catch (e) {}
+  return null;
+}
+
+// From now on, pages use the full list
+properties = loadAllProperties();
