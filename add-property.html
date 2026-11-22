@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Property — Haven</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-row">
+    <a href="index.html" class="brand">Haven<span>.</span></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="add-property.html" class="active">Add Property</a></li>
+        <li><a href="property.html">Property Details</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-intro">
+  <div class="wrap">
+    <h1 id="page-heading">Add a property</h1>
+    <p id="page-sub">Fill in the details below to list a new property. It will appear on the listings page straight away.</p>
+  </div>
+</section>
+
+<div class="form-card">
+  <form id="add-form" novalidate>
+    <div class="form-grid">
+
+      <div class="full">
+        <label for="title">Title</label>
+        <input type="text" id="title" maxlength="80" placeholder="e.g. Shanti Nagar 2BHK">
+      </div>
+
+      <div>
+        <label for="type">Type</label>
+        <select id="type">
+          <option>Villa</option>
+          <option>Apartment</option>
+          <option>Independent House</option>
+          <option>Plot</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="status">Status</label>
+        <select id="status">
+          <option>Available</option>
+          <option>Sold</option>
+          <option>Rented</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="price">Price (₹)</label>
+        <input type="number" id="price" min="0" placeholder="e.g. 5200000">
+      </div>
+
+      <div>
+        <label for="area">Area (sq ft)</label>
+        <input type="number" id="area" min="0" placeholder="e.g. 1200">
+      </div>
+
+      <div class="full">
+        <label for="location">Location</label>
+        <input type="text" id="location" maxlength="100" placeholder="e.g. Govind Nagar, Mathura">
+      </div>
+
+      <div>
+        <label for="bedrooms">Bedrooms</label>
+        <input type="number" id="bedrooms" value="0" min="0">
+      </div>
+
+      <div>
+        <label for="bathrooms">Bathrooms</label>
+        <input type="number" id="bathrooms" value="0" min="0">
+      </div>
+
+      <div>
+        <label for="parking">Parking spots</label>
+        <input type="number" id="parking" value="0" min="0">
+      </div>
+
+      <div>
+        <label for="agent">Agent / owner name</label>
+        <input type="text" id="agent" maxlength="60" placeholder="e.g. Rohan Verma">
+      </div>
+
+      <div class="full">
+        <label for="image-url">Photos (up to 4, the first one is the cover)</label>
+        <div class="image-add">
+          <input type="text" id="image-url" placeholder="Paste an image link (https://...)">
+          <button type="button" class="btn-small" id="add-url-btn">Add link</button>
+        </div>
+        <p class="hint">Or upload from your device:</p>
+        <input type="file" id="image-file" accept="image/*" multiple>
+        <div class="image-preview" id="image-preview"></div>
+      </div>
+
+      <div class="full">
+        <label for="description">Description</label>
+        <textarea id="description" maxlength="800" placeholder="Describe the property (at least 20 characters)"></textarea>
+      </div>
+
+      <div class="full">
+        <label for="amenities">Amenities (separate with commas)</label>
+        <input type="text" id="amenities" placeholder="Lift access, Covered parking, Power backup">
+      </div>
+
+      <div class="full check-row">
+        <input type="checkbox" id="featured">
+        <label for="featured">Mark as featured</label>
+      </div>
+
+    </div>
+
+    <p id="form-message" class="form-message"></p>
+
+    <div class="form-actions">
+      <button type="submit" class="form-btn" id="save-btn">Save Property</button>
+      <a href="listings.html" class="action-link">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <span class="brand">Haven<span>.</span></span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <p class="footer-note">Real Estate Property Management Platform — Mini Project, GLA University.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/add-property.js"></script>
+
+</body>
+</html>
