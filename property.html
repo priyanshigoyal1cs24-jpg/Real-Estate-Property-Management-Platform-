@@ -17,6 +17,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="listings.html">Listings</a></li>
+        <li><a href="add-property.html">Add Property</a></li>
         <li><a href="property.html" class="active">Property Details</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -44,13 +45,46 @@
           </div>
           <p class="location-line" id="prop-location"></p>
 
+          <div class="badge-row" id="badge-row"></div>
+
           <div class="spec-strip" id="spec-strip"></div>
+
+          <div class="manage-row">
+            <a href="add-property.html" class="action-link" id="edit-link">Edit property</a>
+            <button type="button" class="action-delete" id="delete-btn">Delete property</button>
+          </div>
 
           <h2 class="section-title">Description</h2>
           <p class="description" id="prop-description"></p>
 
           <h2 class="section-title">Amenities</h2>
           <ul class="amenities-list" id="amenities"></ul>
+
+          <h2 class="section-title">Location</h2>
+          <iframe class="map-frame" id="map-frame" title="Map of the property location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+          <h2 class="section-title">EMI Calculator</h2>
+          <div class="emi-box">
+            <div class="emi-grid">
+              <div>
+                <label for="emi-amount">Loan amount (₹)</label>
+                <input type="number" id="emi-amount" min="0">
+              </div>
+              <div>
+                <label for="emi-rate">Interest rate (% per year)</label>
+                <input type="number" id="emi-rate" value="8.5" min="0" step="0.1">
+              </div>
+              <div>
+                <label for="emi-years">Loan period (years)</label>
+                <input type="number" id="emi-years" value="20" min="1" max="40">
+              </div>
+            </div>
+            <div class="emi-result">
+              <div><span class="num" id="emi-monthly">—</span><span class="label">Monthly EMI</span></div>
+              <div><span class="num" id="emi-interest">—</span><span class="label">Total interest</span></div>
+              <div><span class="num" id="emi-total">—</span><span class="label">Total payable</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -74,6 +108,12 @@
       </aside>
 
     </div>
+
+    <div id="similar-section" class="similar-section">
+      <h2 class="section-title">Similar properties</h2>
+      <div class="property-grid" id="similar-grid"></div>
+    </div>
+
   </div>
 </section>
 
