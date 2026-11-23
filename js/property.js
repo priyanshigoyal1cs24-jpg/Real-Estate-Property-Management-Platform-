@@ -204,10 +204,25 @@ function showProperty(p) {
       formMsg.textContent = "Please enter a valid 10-digit phone number.";
       formMsg.className = "form-msg error";
     } else {
-      formMsg.textContent = "Thank you " + name + "! Your inquiry for " + p.title + " has been sent.";
-      formMsg.className = "form-msg success";
-      document.getElementById("name").value = "";
-      document.getElementById("phone").value = "";
+      // Save the inquiry so it shows on the Inquiries page
+      var saved = addInquiry({
+        propertyId: p.id,
+        propertyTitle: p.title,
+        name: name,
+        phone: phone,
+        message: document.getElementById("message").value.trim(),
+        date: new Date().toISOString()
+      });
+
+      if (saved) {
+        formMsg.textContent = "Thank you " + name + "! Your inquiry for " + p.title + " has been sent.";
+        formMsg.className = "form-msg success";
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+      } else {
+        formMsg.textContent = "Sorry, the inquiry could not be saved. Please try again.";
+        formMsg.className = "form-msg error";
+      }
     }
   };
 }
