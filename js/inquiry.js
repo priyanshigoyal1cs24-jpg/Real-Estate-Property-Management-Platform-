@@ -1,73 +1,114 @@
-// Get the inquiry form elements
-var button = document.querySelector(".btn-primary");
-var inquiryList = document.getElementById("inquiry-list");
+// Inquiries page: shows the messages sent from the property pages
 
-// Get saved inquiries from browser storage
-function getInquiries() {
-    return JSON.parse(localStorage.getItem("inquiries") || "[]");
+var listBox = document.getElementById("inquiry-list");
+var countText = document.getElementById("inquiry-count");
+var clearAllBtn = document.getElementById("clear-all");
+var tabButtons = document.querySelectorAll(".filter-btn");
+
+var activeTab = "All";
+
+function formatDate(isoText) {
+  var date = new Date(isoText);
+  if (isNaN(date.getTime())) {
+    return "";
+  }
+  return date.toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" });
 }
 
-// Save inquiry when customer clicks the button
-if (button) {
-    button.onclick = function (event) {
-        var name = document.getElementById("name").value.trim();
-        var phone = document.getElementById("phone").value.trim();
-        var message = document.getElementById("message").value.trim();
+function showInquiries() {
+  var all = getInquiries();
+  var list = [];
+  var newCount = 0;
 
-        if (!name || !phone) {
-            alert("Please enter your name and phone number.");
-            return;
-        }
-
-        if (!/^\d{10}$/.test(phone)) {
-            alert("Phone number must be 10 digits.");
-            return;
-        }
-
-        // Get current property details
-        var params = new URLSearchParams(window.location.search);
-        var propertyId = Number(params.get("id"));
-        var property = findById(properties, propertyId);
-
-        var inquiry = {
-            name: name,
-            phone: phone,
-            message: message,
-            property: property ? property.title : "Unknown Property",
-            date: new Date().toLocaleString()
-        };
-
-        // Store inquiry in localStorage
-        var inquiries = getInquiries();
-        inquiries.push(inquiry);
-
-        localStorage.setItem("inquiries", JSON.stringify(inquiries));
-
-        alert("Thank you " + name + "! Your inquiry has been saved.");
-
-        document.getElementById("name").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("message").value = "";
-    };
-}
-
-// Display all inquiries on inquiries.html
-if (inquiryList) {
-    var inquiries = getInquiries();
-
-    if (inquiries.length === 0) {
-        inquiryList.innerHTML = "<p>No inquiries received yet.</p>";
-    } else {
-        inquiryList.innerHTML = inquiries.map(function (item) {
-            return `
-                <div class="property-card" style="padding:25px; margin-bottom:20px;">
-                    <h3>${escapeHtml(item.property)}</h3>
-                    <p><strong>Customer:</strong> ${escapeHtml(item.name)}</p>
-                    <p><strong>Phone:</strong> ${escapeHtml(item.phone)}</p>
-                    <p><strong>Message:</strong> ${escapeHtml(item.message)}</p>
-                    <p><strong>Date:</strong> ${escapeHtml(item.date)}</p>
-                </div>
-            `;
-        }).join("");
+  for (var i = 0; i < all.length; i++) {
+    if (!all[i].read) {
+      newCount++;
     }
+    if (activeTab === "All" || (activeTab === "New" && !all[i].read) || (activeTab === "Read" && all[i].read)) {
+      list.push(all[i]);
+    }
+  }
+
+  countText.textContent = all.length + " total, " + newCount + " new";
+  clearAllBtn.style.display = all.length === 0 ? "none" : "inline";
+
+  if (list.length === 0) {
+    if (all.length === 0) {
+      listBox.innerHTML = '<p class="empty-msg">No inquiries yet. When someone sends an inquiry from a property page, it will show up here.</p>';
+    } else {
+      listBox.innerHTML = '<p class="empty-msg">No inquiries in this tab.</p>';
+    }
+    return;
+  }
+
+  var html = "";
+  for (var j = 0; j < list.length; j++) {
+    var q = list[j];
+    var cardClass = q.read ? "inquiry-card" : "inquiry-card unread";
+
+    html += '<article class="' + cardClass + '">';
+    html += '  <div class="inquiry-top">';
+    html += '    <div>';
+    html += '      <h3>' + escapeHtml(q.name) + (q.read ? '' : ' <span class="new-dot">New</span>') + '</h3>';
+    html += '      <p class="inquiry-meta">' + escapeHtml(formatDate(q.date)) + '</p>';
+    html += '    </div>';
+    html += '    <a href="tel:' + escapeHtml(q.phone) + '" class="inquiry-phone">' + escapeHtml(q.phone) + '</a>';
+    html += '  </div>';
+    html += '  <p class="inquiry-property">About: <a href="property.html?id=' + Number(q.propertyId) + '">' + escapeHtml(q.propertyTitle) + '</a></p>';
+    html += '  <p class="inquiry-message">' + escapeHtml(q.message || "(no message)") + '</p>';
+    html += '  <div class="card-actions">';
+    html += '    <button type="button" class="action-link" data-action="toggle" data-id="' + q.id + '">' + (q.read ? 'Mark as new' : 'Mark as read') + '</button>';
+    html += '    <button type="button" class="action-delete" data-action="delete" data-id="' + q.id + '">Delete</button>';
+    html += '  </div>';
+    html += '</article>';
+  }
+  listBox.innerHTML = html;
 }
+
+// One click handler for all the buttons inside the list
+listBox.onclick = function (e) {
+  var button = e.target.closest("button[data-action]");
+  if (!button) {
+    return;
+  }
+
+  var id = Number(button.getAttribute("data-id"));
+  var action = button.getAttribute("data-action");
+  var all = getInquiries();
+  var kept = [];
+
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].id === id) {
+      if (action === "toggle") {
+        all[i].read = !all[i].read;
+        kept.push(all[i]);
+      }
+      // for "delete" we simply do not keep it
+    } else {
+      kept.push(all[i]);
+    }
+  }
+
+  saveInquiries(kept);
+  showInquiries();
+};
+
+clearAllBtn.onclick = function () {
+  if (confirm("Delete all inquiries? This cannot be undone.")) {
+    saveInquiries([]);
+    showInquiries();
+  }
+};
+
+for (var i = 0; i < tabButtons.length; i++) {
+  tabButtons[i].onclick = function () {
+    for (var j = 0; j < tabButtons.length; j++) {
+      tabButtons[j].classList.remove("active");
+    }
+    this.classList.add("active");
+    activeTab = this.getAttribute("data-tab");
+    showInquiries();
+  };
+}
+
+showInquiries();
