@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inquiries — Haven</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,7 +17,9 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="listings.html">Listings</a></li>
+        <li><a href="add-property.html">Add Property</a></li>
         <li><a href="inquiries.html" class="active">Inquiries</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </div>
@@ -23,24 +27,51 @@
 
 <section class="page-intro">
   <div class="wrap">
-    <h1>Customer Inquiries</h1>
-    <p>View all inquiries received from interested buyers.</p>
+    <h1>Inquiries</h1>
+    <p>Messages sent by buyers from the property pages. Mark them as read or delete them once you have replied.</p>
   </div>
 </section>
 
-<main class="wrap">
-  <div id="inquiry-list"></div>
-</main>
+<section class="listings-section">
+  <div class="wrap">
+
+    <div class="results-bar">
+      <h2>All inquiries</h2>
+      <span id="inquiry-count"></span>
+    </div>
+
+    <div class="filter-bar">
+      <button type="button" class="filter-btn active" data-tab="All">All</button>
+      <button type="button" class="filter-btn" data-tab="New">New</button>
+      <button type="button" class="filter-btn" data-tab="Read">Read</button>
+    </div>
+
+    <div class="inquiry-list" id="inquiry-list"></div>
+
+    <p class="reset-row">
+      <a href="listings.html" class="action-link">← Back to listings</a>
+      <button type="button" class="action-delete" id="clear-all">Delete all inquiries</button>
+    </p>
+
+  </div>
+</section>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p class="footer-note">
-      Real Estate Property Management Platform — Mini Project, GLA University.
-    </p>
+    <div class="footer-row">
+      <span class="brand">Haven<span>.</span></span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <p class="footer-note">Real Estate Property Management Platform — Mini Project, GLA University.</p>
   </div>
 </footer>
 
 <script src="js/data.js"></script>
-<script src="js/inquiry.js"></script>
+<script src="js/inquiries.js"></script>
+
 </body>
 </html>
