@@ -325,3 +325,21 @@ function takeFlash() {
 
 // From now on, pages use the full list
 properties = loadAllProperties();
+
+// ---------- Inquiries (messages sent from the property page) ----------
+function getInquiries() {
+  return readList("inquiries");
+}
+
+function saveInquiries(list) {
+  return writeList("inquiries", list);
+}
+
+// Adds a new inquiry at the top of the list. Returns true or false.
+function addInquiry(inquiry) {
+  var list = getInquiries();
+  inquiry.id = Date.now();
+  inquiry.read = false;
+  list.unshift(inquiry);
+  return saveInquiries(list);
+}
