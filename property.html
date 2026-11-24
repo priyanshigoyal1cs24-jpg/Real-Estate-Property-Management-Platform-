@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Details — Haven</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-row">
+    <a href="index.html" class="brand">Haven<span>.</span></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="add-property.html">Add Property</a></li>
+        <li><a href="inquiries.html">Inquiries</a></li>
+        <li><a href="property.html" class="active">Property Details</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="details-section">
+  <div class="wrap">
+
+    <p class="breadcrumb"><a href="listings.html">Listings</a> &nbsp;/&nbsp; <span id="crumb-name"></span></p>
+
+    <div class="details-layout">
+
+      <div class="gallery-col">
+        <div class="gallery-main">
+          <img id="main-image" alt="">
+        </div>
+        <div class="gallery-thumbs" id="thumbs"></div>
+
+        <div class="details-main">
+          <div class="heading-row">
+            <h1 id="prop-title"></h1>
+            <span class="price-tag" id="prop-price"></span>
+          </div>
+          <p class="location-line" id="prop-location"></p>
+
+          <div class="badge-row" id="badge-row"></div>
+
+          <div class="spec-strip" id="spec-strip"></div>
+
+          <div class="manage-row">
+            <a href="add-property.html" class="action-link" id="edit-link">Edit property</a>
+            <button type="button" class="action-delete" id="delete-btn">Delete property</button>
+          </div>
+
+          <h2 class="section-title">Description</h2>
+          <p class="description" id="prop-description"></p>
+
+          <h2 class="section-title">Amenities</h2>
+          <ul class="amenities-list" id="amenities"></ul>
+
+          <h2 class="section-title">Location</h2>
+          <iframe class="map-frame" id="map-frame" title="Map of the property location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+          <h2 class="section-title">EMI Calculator</h2>
+          <div class="emi-box">
+            <div class="emi-grid">
+              <div>
+                <label for="emi-amount">Loan amount (₹)</label>
+                <input type="number" id="emi-amount" min="0">
+              </div>
+              <div>
+                <label for="emi-rate">Interest rate (% per year)</label>
+                <input type="number" id="emi-rate" value="8.5" min="0" step="0.1">
+              </div>
+              <div>
+                <label for="emi-years">Loan period (years)</label>
+                <input type="number" id="emi-years" value="20" min="1" max="40">
+              </div>
+            </div>
+            <div class="emi-result">
+              <div><span class="num" id="emi-monthly">—</span><span class="label">Monthly EMI</span></div>
+              <div><span class="num" id="emi-interest">—</span><span class="label">Total interest</span></div>
+              <div><span class="num" id="emi-total">—</span><span class="label">Total payable</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="contact-card">
+          <h3>Contact the Owner</h3>
+          <p class="agent-name" id="agent-name"></p>
+
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Enter your name">
+
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" placeholder="Enter your 10-digit phone number">
+
+          <label for="message">Message</label>
+          <textarea id="message"></textarea>
+
+          <p class="form-msg" id="form-msg"></p>
+          <button type="button" class="btn-primary" id="send-btn">Send Inquiry</button>
+        </div>
+      </aside>
+
+    </div>
+
+    <div id="similar-section" class="similar-section">
+      <h2 class="section-title">Similar properties</h2>
+      <div class="property-grid" id="similar-grid"></div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <span class="brand">Haven<span>.</span></span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <p class="footer-note">Real Estate Property Management Platform — Mini Project, GLA University.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/property.js"></script>
+
+</body>
+</html>
