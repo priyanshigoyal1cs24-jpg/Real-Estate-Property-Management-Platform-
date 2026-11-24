@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Properties - RealEstate Manager</title>
+  <link rel="stylesheet" href="search.css" />
+</head>
+<body onload="loadProperties()">
+
+  <!-- ===== Top search bar ===== -->
+  <div class="search-header">
+    <h1>Real<span>Estate</span> Manager</h1>
+    <div class="search-bar">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by location or property name..."
+        onkeypress="handleSearchKeypress(event)"
+      />
+      <button onclick="applyFilters()">Search</button>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- ===== Filters sidebar ===== -->
+    <div class="filters-panel">
+      <h3>Filters</h3>
+
+      <div class="filter-group">
+        <label for="typeFilter">Property type</label>
+        <select id="typeFilter">
+          <option value="all">All types</option>
+          <option value="apartment">Apartment</option>
+          <option value="house">House</option>
+          <option value="villa">Villa</option>
+          <option value="plot">Plot</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="locationFilter">Location</label>
+        <select id="locationFilter">
+          <option value="all">All locations</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Price range (₹)</label>
+        <div class="price-inputs">
+          <input type="number" id="minPrice" placeholder="Min" />
+          <input type="number" id="maxPrice" placeholder="Max" />
+        </div>
+        <div class="error-text" id="priceError">Min price, max price se zyada nahi ho sakta.</div>
+      </div>
+
+      <div class="filter-group">
+        <label for="bedroomsFilter">Bedrooms</label>
+        <select id="bedroomsFilter">
+          <option value="any">Any</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4+</option>
+        </select>
+      </div>
+
+      <button class="btn-apply" onclick="applyFilters()">Apply Filters</button>
+      <button class="btn-reset" onclick="resetFilters()">Reset</button>
+    </div>
+
+    <!-- ===== Results ===== -->
+    <div class="results-area">
+      <div class="results-top">
+        <div class="results-meta" id="resultsMeta">Loading properties...</div>
+        <div class="sort-box">
+          <label for="sortSelect">Sort by</label>
+          <select id="sortSelect">
+            <option value="default">Default</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="area-high">Area: Large to Small</option>
+            <option value="area-low">Area: Small to Large</option>
+          </select>
+        </div>
+      </div>
+      <div class="active-filters" id="activeFilters"></div>
+      <div class="results-grid" id="resultsGrid"></div>
+    </div>
+
+  </div>
+
+  <script src="filter.js"></script>
+</body>
+</html>
